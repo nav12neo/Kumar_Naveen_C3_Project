@@ -29,10 +29,9 @@ class RestaurantTest {
     public void is_restaurant_open_should_return_true_if_time_is_between_opening_and_closing_time(){
         Clock clock = Clock.fixed(Instant.parse("2021-09-20T11:00:30.00Z"), ZoneId.of("UTC"));
         LocalTime localTime = LocalTime.now(clock);
-        Restaurant restaurant1 = Mockito.spy(restaurant);
-        Mockito.doReturn(localTime).when(restaurant1).getCurrentTime();
-        restaurant1.displayDetails();
-        boolean isOpen = restaurant1.isRestaurantOpen();
+        Restaurant spyRestaurant = Mockito.spy(restaurant);
+        Mockito.doReturn(localTime).when(spyRestaurant).getCurrentTime();
+        boolean isOpen = spyRestaurant.isRestaurantOpen();
         assertTrue(isOpen);
     }
 
@@ -40,10 +39,9 @@ class RestaurantTest {
     public void is_restaurant_open_should_return_false_if_time_is_outside_opening_and_closing_time(){
         Clock clock = Clock.fixed(Instant.parse("2021-09-20T23:15:30.00Z"), ZoneId.of("UTC"));
         LocalTime localTime = LocalTime.now(clock);
-        Restaurant restaurant1 = Mockito.spy(restaurant);
-        Mockito.doReturn(localTime).when(restaurant1).getCurrentTime();
-        restaurant1.displayDetails();
-        boolean isOpen = restaurant1.isRestaurantOpen();
+        Restaurant spyRestaurant = Mockito.spy(restaurant);
+        Mockito.doReturn(localTime).when(spyRestaurant).getCurrentTime();
+        boolean isOpen = spyRestaurant.isRestaurantOpen();
         assertFalse(isOpen);
     }
 
