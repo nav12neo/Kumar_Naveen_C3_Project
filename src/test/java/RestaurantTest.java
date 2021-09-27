@@ -10,6 +10,8 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
 
 class RestaurantTest {
@@ -21,6 +23,7 @@ class RestaurantTest {
         LocalTime closingTime = LocalTime.parse("22:00:00");
         restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
         restaurant.addToMenu("Sweet corn soup",119);
+        restaurant.addToMenu("Chicken Tikka",100);
         restaurant.addToMenu("Vegetable lasagne", 269);
     }
     //>>>>>>>>>>>>>>>>>>>>>>>>>OPEN/CLOSED<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -67,4 +70,20 @@ class RestaurantTest {
             ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>ORDER TOTAL<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    @Test
+    public void selected_items_from_menu_should_return_total_order_amount () {
+        int orderTotal;
+        List<String> selectedItems = new ArrayList<>();
+        selectedItems.add("Sweet corn soup");
+        selectedItems.add("Chicken Tikka");
+
+        orderTotal = restaurant.getOrderTotal(selectedItems);
+
+        assertEquals(219,orderTotal);
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<ORDER TOTAL>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
