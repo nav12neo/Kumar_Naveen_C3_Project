@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class Restaurant {
         Item newItem = new Item(name,price);
         menu.add(newItem);
     }
-    
+
     public void removeFromMenu(String itemName) throws itemNotFoundException {
 
         Item itemToBeRemoved = findItemByName(itemName);
@@ -58,6 +59,16 @@ public class Restaurant {
 
     public String getName() {
         return name;
+    }
+
+    public int getOrderTotal(List<String> selectedItems) {
+        int orderTotal;
+        orderTotal = 0;
+        for(Item item: getMenu())
+            if (selectedItems.contains(item.getName())) {
+                orderTotal += item.getPrice();
+            }
+        return orderTotal;
     }
 
 }
